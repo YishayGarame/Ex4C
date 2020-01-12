@@ -10,6 +10,8 @@ int main(int argc, char *argv[])
 	char letter;
 	char *word = NULL;
 	word = (char *)malloc(2 * (sizeof(char)));
+	*word = 0;
+	*(word+1) = 0;
 	int index = 0;
 	int word_length=0;
 	int max_length = 0;
@@ -17,17 +19,22 @@ int main(int argc, char *argv[])
 
 	while ((scanf("%c", &letter)) == 1) // gets each word and check if something went wrong with scanf function
 	{
-		
 
+		//printf("the letter is : %c\n",letter);
 		if ((letter == '\n') || (letter == '\t') || (letter == '\0') || (letter == ' ') || (letter == ',')) //end of word
 		{
+			
+			//printf("letter in while is : %d\n",letter);
 			if(word_length > max_length)
 				max_length = word_length;
-			word[index] = '\0';
+
+			 word[index] = '\0';
 			index = 0;
 			insertNode(Root, word);
 			free(word);
 			word = (char *)malloc(2 * (sizeof(char)));
+			*word = 0;
+			*(word+1) = 0;
 			word_length = 0;
 			continue;
 		}
@@ -40,16 +47,21 @@ int main(int argc, char *argv[])
 		word[index] = letter;
 		index++;
 		word = realloc(word, index + 2);
+		for(int i=index;i<index+2;i++){
+			*(word+index) =0;
+		}
 		word_length++;
 		}
 	}
-			if(word_length > max_length)
-			max_length = word_length;
-			word[index] = '\0';
-			index = 0;
+			// if(word_length > max_length)
+			// max_length = word_length;
+			// word[index] = '\0';
+			// index = 0;
 			insertNode(Root, word);
 			free(word);
 			word = (char *)malloc(2 * (sizeof(char)));
+			*word = 0;
+			*(word+1) = 0;
 			word_length = 0;
 			
 	free(word);

@@ -83,21 +83,24 @@ void freeNode(Node *trieTree)
 
 void insertNode(Node *trieNode, char l[])
 {
-
-	//printf("%s", l);
+	if (*l != '\0' && *l != ' ' && *l != '\t' && *l != '\n'){
+//	printf("%s", l);
 	Node *currentNode = trieNode;
-
-	while (*l != '\0')
+    
+	while (*l != '\0' && *l != ' ' && *l != '\t' && *l != '\n')
 	{
 
 		if (currentNode->children[*l - CASE] == NULL)
 		{
+			// printf("%d\n",*l-CASE);
 			currentNode->children[*l - CASE] = newNode();
 			currentNode->children[*l - CASE]->parent = currentNode;
 		}
 		currentNode = currentNode->children[*l - CASE];
 		l++;
 	}
+	//if(*l == '\0') return;
 	currentNode->occurrences++;
+}
 }
 
