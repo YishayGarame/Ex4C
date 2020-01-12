@@ -14,7 +14,8 @@ typedef struct Node{
 } Node;
 
 Node* newNode();
-void InsertNode(Node* trieNode, char* word);
+void insertNode(Node* trieNode, char* word);
 Node* Search(Node* trieTree, char* word);
-void printPreOrder(Node* node, char s[]);
-void printReverse(Node* node, char s[]); 
+void printPreOrder(Node* node, char s[], int i);
+void printReverse(Node* node, char s[], int i); 
+void freeNode(Node *trieTree);

@@ -1,12 +1,18 @@
 # _*_ Makefile _*_
 
-all: frequency trie1.o
+CC=gcc
+FLAGS= -Wall -g
 
-frequency:trie1.o 
-	gcc -Wall -g -o frequency trie1.o
+all:  mainTrie.o trie1.o frequency
 
-trie.o: trie1.c trie1.h
-	gcc -Wall -g -c trie.c
+frequency: mainTrie.o trie1.o 
+	$(CC) $(FLAGS) mainTrie.o trie1.o -o frequency
+
+mainTrie.o: mainTrie.c trie1.h
+	$(CC) $(FLAGS) -c  mainTrie.c
+
+trie1.o: trie1.c trie1.h
+	$(CC) $(FLAGS) -c  trie1.c
 
 .PHONY: clean all 
 
