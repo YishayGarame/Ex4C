@@ -7,12 +7,12 @@
  #define ALPHABET_SIZE 26
 #define CASE 'a'
 
-Node *newNode()
+Node *newNode() //initialize a new node in graph
 {
 	Node *p = (Node *)malloc(sizeof(Node));
-	p->parent = NULL;
-	p->occurrences = 0;
-	for (int i = 0; i < ALPHABET_SIZE; i++)
+	p->parent = NULL; //previous letter
+	p->occurrences = 0; //number of occurrences in graph 
+	for (int i = 0; i < ALPHABET_SIZE; i++) //gets rid of garbage
 	{
 		p->children[i] = NULL;
 	}
@@ -23,33 +23,27 @@ Node *newNode()
 
 void printPreOrder(Node *node, char s[], int index)
 {
-	if (node->occurrences > 0)
+	if (node->occurrences > 0) //end of word
 	{
 		s[index]='\0';
 		printf("%s\t%d\n", s, node->occurrences);
-
 	}
+	
 	for (int i = 0; i < ALPHABET_SIZE; i++)
 	{
-		if (node->children[i] != NULL)
+		if (node->children[i] != NULL) //theres another letter following
 		{
 			s[index] = i + CASE;			
 			index++;		
-			printPreOrder(node->children[i], s,  index);
-		
-			index--; 
-		
-			
+			printPreOrder(node->children[i], s,  index); //recursive call with updated array and next index
+			index--; 		                             
 		}		
-
-	} 
-	
-			
+	} 			
 }  
 
 void printReverse(Node *node, char s[], int index)
 {
-	if (node->occurrences > 0)
+	if (node->occurrences > 0) //end of word
 	{
 		s[index]='\0';
 		printf("%s\t%d\n", s, node->occurrences);
@@ -57,17 +51,17 @@ void printReverse(Node *node, char s[], int index)
 
 	for (int i = ALPHABET_SIZE-1; i >= 0; i--)
 	{
-		if (node->children[i] != NULL)
+		if (node->children[i] != NULL)  //theres another letter following
 		{
-			s[index] = i + CASE;
+			s[index] = i + CASE; //adds next letter to array
 			index++;
-			printReverse(node->children[i], s, index);
-			index--;
+			printReverse(node->children[i], s, index); //recursive call with updated array and next index
+			index--; 
 		} 
 	}
 }
 
-void freeNode(Node *trieTree)
+void freeNode(Node *trieTree) //free each letter on the tree
 {
 	Node *currentNode = trieTree;
 
@@ -81,10 +75,9 @@ void freeNode(Node *trieTree)
 	free(currentNode);
 }
 
-void insertNode(Node *trieNode, char l[])
+void insertNode(Node *trieNode, char l[]) //add letters to tree
 {
 	if (*l != '\0' && *l != ' ' && *l != '\t' && *l != '\n'){
-//	printf("%s", l);
 	Node *currentNode = trieNode;
     
 	while (*l != '\0' && *l != ' ' && *l != '\t' && *l != '\n')
@@ -92,14 +85,12 @@ void insertNode(Node *trieNode, char l[])
 
 		if (currentNode->children[*l - CASE] == NULL)
 		{
-			// printf("%d\n",*l-CASE);
 			currentNode->children[*l - CASE] = newNode();
 			currentNode->children[*l - CASE]->parent = currentNode;
 		}
 		currentNode = currentNode->children[*l - CASE];
 		l++;
 	}
-	//if(*l == '\0') return;
 	currentNode->occurrences++;
 }
 }
