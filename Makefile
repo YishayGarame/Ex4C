@@ -1,6 +1,7 @@
+# _*_ Makefile _*_
 
 CC=gcc
-FLAGS= —g -Wall
+FLAGS= -Wall -g
 
 all:  mainTrie.o trie1.o frequency
 
