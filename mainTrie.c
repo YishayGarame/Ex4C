@@ -65,7 +65,6 @@ int main(int argc, char *argv[])
 	if (argc == 1) // prints a -> z
 	{
 		int i=0;
-		printf("there is only 1 argc\n");
 		printPreOrder(Root,  w, i);
 	} 
 	
@@ -73,7 +72,6 @@ int main(int argc, char *argv[])
 	{
 
 		int i=0;
-		printf("there is only 2 argc\n");
 		printReverse(Root, w, i);
 	}
 
