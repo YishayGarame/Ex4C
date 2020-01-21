@@ -10,6 +10,11 @@
 Node *newNode() //initialize a new node in graph
 {
 	Node *p = (Node *)malloc(sizeof(Node));
+	if(p==NULL)
+	{
+		printf("error\n");
+		exit(0);
+	}
 	p->parent = NULL; //previous letter
 	p->occurrences = 0; //number of occurrences in graph 
 	for (int i = 0; i < ALPHABET_SIZE; i++) //gets rid of garbage

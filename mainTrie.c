@@ -10,6 +10,10 @@ int main(int argc, char *argv[])
 	char letter;
 	char *word = NULL; //word we want to insert
 	word = (char *)malloc(2 * (sizeof(char))); //initialize to size 2
+	if(word==NULL){
+		printf("error\n");
+		exit(0);
+	}
 	*word = 0; //get rid of garbage
 	*(word+1) = 0; //get rid of garbage
 	int index = 0; //index of word
@@ -31,6 +35,11 @@ int main(int argc, char *argv[])
 			insertNode(Root, word);
 			free(word); //finished with specific word after insert
 			word = (char *)malloc(2 * (sizeof(char))); //initialize new word
+			if(word==NULL)
+			{
+				printf("error\n");
+				exit(0);
+			}
 			*word = 0;
 			*(word+1) = 0;
 			word_length = 0;
@@ -45,6 +54,11 @@ int main(int argc, char *argv[])
 		word[index] = letter;
 		index++;
 		word = realloc(word, index + 2);
+		if(word==NULL)
+		{
+			printf("error\n");
+			exit(0);
+		}
 		for(int i=index;i<index+2;i++){
 			*(word+index) =0;
 		}
@@ -54,6 +68,11 @@ int main(int argc, char *argv[])
 			insertNode(Root, word);
 			free(word);
 			word = (char *)malloc(2 * (sizeof(char)));
+			if(word==NULL)
+			{
+			printf("error\n");
+			exit(0);
+			}
 			*word = 0;
 			*(word+1) = 0;
 			word_length = 0;
